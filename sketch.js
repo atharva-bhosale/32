@@ -1,3 +1,4 @@
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -5,7 +6,7 @@ const Constraint = Matter.Constraint;
 
 var engine, world;
 var backgroundImg;
-
+var time
 var bg ;
 
 //var backgroundImg;
@@ -20,23 +21,25 @@ function setup(){
     engine = Engine.create();
     world = engine.world;
 
+    getBackgroundImg();
 }
+
 
 function draw(){
     if(backgroundImg){
         background(backgroundImg);
         }
     // add condition to check if any background image is there to add
-   // getBackgroundImg();
+
 
     Engine.update(engine);
 
     // write code to display time in correct format here
 
 
-}
 
-async function getBackgroundImg(){
+}
+//async function getBackgroundImg(){
 
     // write code to fetch time from API
 
@@ -50,57 +53,83 @@ async function getBackgroundImg(){
 
     //load the image in backgroundImg variable here
 
-    async function getBackgroundImg(){
+    async function getTime(){
+     
         var response=await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
         var responseJSON = await response.json();
-       // console.log(responseJSON);
      var datetime=responseJSON.datetime;
+     
+     var hour=datetime.slice(23,24);
+    
+     fill("black")
+     time=text("time"+datetime,60,60);  
+    }
+
+    async function getBackgroundImg(){
+        var time
+
+   
+        var response=await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+        var responseJSON = await response.json();
+     var datetime=responseJSON.datetime;
+     fill("black")
+     time=text("time"+datetime,60,60);  
      var hour=datetime.slice(11,13);
-    // console.log(hour);
+
+  
+     
+   //  time.depth=bg.depth;
+     //time.depth=bg.depth+0.2;
+     
     
     if(hour>=08 && hour<=09){
-     bg=sunrise1.png;
+     bg="sunrise1.png";
     }
     else if(hour>=09 && hour<=10){
-        bg=sunrise2.png;
+        bg="sunrise2.png";
     }
     else if(hour>=10 && hour<=11){
-        bg=sunrise3.png;
+        bg="sunrise3.png";
     }
     else if(hour>=11 && hour<=12){
-        bg=sunrise4.png;
+        bg="sunrise4.png";
     }       
     else if(hour>=12 && hour<=13){
-        bg=sunrise5.png;
+        bg="sunrise5.png";
     }  
     else if(hour>=13 && hour<=14){
-        bg=sunrise6.png;
+        bg="sunrise6.png";
     }  
     else if(hour>=15 && hour<=17){
-        bg=sunset7.png;
+        bg="sunset7.png";
     } 
     else if(hour>=17 && hour<=19){
-        bg=sunset7.png;
+        bg="sunset7.png";
     }
      else if(hour>=19 && hour<=21){
-        bg=sunset8.png;
+        bg="sunset8.png";
     }
      else if(hour>=21 && hour<=23){
-        bg=sunset9.png;
+        bg="sunset9.png";
     } 
     else if(hour>=23 && hour<=02){
-        bg=sunset10.png;
+        bg="sunset10.png";
     } 
     else if(hour>=02 && hour<=05){
-        bg=sunset11.png;
+        bg="sunset11.png";
     }
      else if(hour>=05 && hour<=08){
-        bg=sunset12.png;
+        bg="sunset12.png";
     }
+ 
 
+      
     backgroundImg=loadImage(bg);
-    
+
+   
+  
     
     }
 
-}
+
+    
